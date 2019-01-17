@@ -1,0 +1,104 @@
+#端口
+server:
+  port: 8081
+
+#配置日志
+logging:
+  #配置日志文件路径
+  level:
+    com.wuzt.myblog.dao: DEBUG # #不同目录下的日志可配置不同级别（改成你的mapper文件所在包路径,打印sql）
+    org.springfromework.web: info
+    org.hibernate: error
+    #采用相对路径方式将日志文件输出到【log\myspringboot.log】
+    file: log\myspringboot.log
+
+#数据库
+spring:
+    datasource:
+        #name: mysql_test
+        type: com.alibaba.druid.pool.DruidDataSource
+        #druid相关配置
+        druid:
+          #监控统计拦截的filters
+          filters: stat
+          driver-class-name: com.mysql.jdbc.Driver
+          #基本属性
+          url: jdbc:mysql://140.143.233.156:3306/myBlogs?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true
+          username: root
+          password: wzt3521478
+          #配置初始化大小/最小/最大
+          initial-size: 1
+          min-idle: 1
+          max-active: 20
+          #获取连接等待超时时间
+          max-wait: 60000
+          #间隔多久进行一次检测，检测需要关闭的空闲连接
+          time-between-eviction-runs-millis: 60000
+          #一个连接在池中最小生存的时间
+          min-evictable-idle-time-millis: 300000
+          validation-query: SELECT 'x'
+          test-while-idle: true
+          test-on-borrow: false
+          test-on-return: false
+          #打开PSCache，并指定每个连接上PSCache的大小。oracle设为true，mysql设为false。分库分表较多推荐设置为false
+          pool-prepared-statements: false
+          max-pool-prepared-statement-per-connection-size: 20
+
+    #freemarker
+    freemarker:
+        allow-request-override: false
+        cache: false
+        check-template-location: true
+        charset: UTF-8
+        content-type: text/html; charset=utf-8
+        expose-request-attributes: false
+        expose-session-attributes: false
+        expose-spring-macro-helpers: false
+        suffix: .ftl
+        #.ftl文件路径
+        template-loader-path: classpath:/templates
+        template_update_delay: 0
+
+    mvc:
+      #静态文件地址
+      static-path-pattern: /static/**
+
+
+#redis
+    redis:
+      #数据库索引
+      database: 0
+      host: 140.143.233.156
+      port: 6379
+      password: wzt3521478
+      #连接超时时间
+      timeout: 10000
+      pool:
+        #最大连接数
+        max-active: 8
+        #最大阻塞等待时间(负数表示没限制)
+        max-wait: -1
+        #最大空闲
+        max-idle: 8
+        #最小空闲
+        min-idle: 0
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.wuzt.myblog.model
+
+#pagehelper
+pagehelper:
+    helperDialect: mysql
+    reasonable: true
+    supportMethodsArguments: true
+    params: count=countSql
+    returnPageInfo: check
+    testName:
+      applicationName: testRedis
+
+##### value #####
+configValue:
+  filePath: D://aim//
+  fileUploadApi: http://140.143.233.156:8082/fileApi/uploadFile
+  fileHost: http://140.143.233.156:90/

@@ -1,0 +1,47 @@
+.round_icon{
+    width: 70px;
+    height: 70px;
+    display: flex;
+    border-radius: 50%;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    float: left;
+    margin: 5px 5px;
+}
+.editBlog_header{
+    margin: 0 47%;
+}
+.editBlog_header_span{
+    margin: 5px 15px 0px 0px;
+    text-align: center;
+}
+.tag-div{
+    margin-top: 16px;
+    padding: 8px 8px 0 16px;
+    width: 480px;
+    max-height: 200px;
+    background: #FAFAFA;
+    border: 1px solid #DDDDDD;
+    overflow-x: hidden;
+    overflow-y: auto;
+    float: left;
+}
+.checkbox-style{
+    -ms-transform: scale(1.5);
+    -moz-transform: scale(1.5);
+    -webkit-transform: scale(1.5);
+    -o-transform: scale(1.5);
+}
+.tag-span{
+    background: #8e8e8e;
+    border: 2px;
+    border-radius: 2px;
+    padding: 5px 5px 9px 5px;
+    -moz-border-radius: 25px;
+    margin: 0px 5px;
+}
+.blogType-select{
+    width: 120px;
+    height: 35px;
+}

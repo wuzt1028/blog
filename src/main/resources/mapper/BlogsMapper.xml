@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wuzt.myblog.dao.BlogsDao" >
+  <resultMap id="BaseResultMap" type="com.wuzt.myblog.model.Blogs" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="type_id" property="typeId" jdbcType="INTEGER" />
+    <result column="click_num" property="clickNum" jdbcType="BIGINT" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="DATE" />
+  </resultMap>
+
+  <resultMap id="ResultMapWithBLOBs" type="com.wuzt.myblog.model.Blogs" extends="BaseResultMap" >
+    <result column="content" property="content" jdbcType="LONGVARCHAR" />
+  </resultMap>
+
+  <resultMap id="BlogEntityResultMap" type="com.wuzt.myblog.model.BlogEntity" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="type_id" property="typeId" jdbcType="INTEGER" />
+    <result column="typeName" property="typeName" jdbcType="VARCHAR" />
+    <result column="click_num" property="clickNum" jdbcType="BIGINT" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="content" property="content" jdbcType="LONGVARCHAR" />
+    <result column="sub_content" property="subContent" jdbcType="LONGVARCHAR" />
+    <result column="cover" property="cover" jdbcType="LONGVARCHAR" />
+    <collection property="tagList" javaType="java.util.ArrayList" ofType="string">
+      <result column="tagList" property="tagList" jdbcType="VARCHAR" />
+    </collection>
+  </resultMap>
+
+  <sql id="Base_Column_List" >
+    id, title, type_id, click_num, user_id, status, create_time
+  </sql>
+  <sql id="Blob_Column_List" >
+    content
+  </sql>
+
+  <update id="updateClickNumById" parameterType="com.wuzt.myblog.model.Blogs" >
+    update blogs
+    set
+      click_num = #{clickNum,jdbcType=BIGINT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <select id="selectBlogInfoById" resultMap="BlogEntityResultMap" parameterType="java.lang.Integer" >
+    select
+    distinct(blogs.id), blogs.title, blogs.click_num, blogs.user_id, blogs.create_time,blogs.sub_content,blogs.cover,blogs.content,
+    blog_type.type_name as typeName,
+    tags.tag_name as tagList
+    from blogs
+    left join blog_type on blog_type.id = blogs.type_id
+    left join tags on tags.blog_id = blogs.id
+    where blogs.id = #{id}
+  </select>
+
+  <select id="selectBlogListPage" resultMap="BlogEntityResultMap" parameterType="java.util.Map" >
+    select
+    distinct(blogs.id), blogs.title, blogs.click_num, blogs.user_id, blogs.create_time,blogs.sub_content,blogs.cover,
+    blog_type.type_name as typeName,
+    tag1.tag_name as tagList
+    from blogs
+    left join blog_type on blog_type.id = blogs.type_id
+    left join tags tag1 on tag1.blog_id = blogs.id
+    left join tags tag2 on tag2.blog_id = blogs.id
+    <where>
+      blogs.status = '1'
+      <if test="tagName != null and tagName != ''">
+        and tag2.tag_name = #{tagName}
+      </if>
+      <if test="typeId != null and typeId != -1">
+        and blogs.type_id = #{typeId}
+      </if>
+      <if test="startTime != null">
+        and <![CDATA[blogs.create_time > startTime and blogs.create_time < now()]]>
+      </if>
+    </where>
+    order by blogs.create_time desc,blogs.id desc
+    limit #{index},#{pageSize}
+  </select>
+
+  <select id="selectBlogCount" resultType="Integer" parameterType="java.util.Map" >
+    select
+    count(1)
+    from blogs
+    left join blog_type on blog_type.id = blogs.type_id
+    left join tags on tags.blog_id = blogs.id
+    <where>
+      blogs.status = '1'
+      <if test="tagName != null and tagName != ''">
+        and tags.tag_name = #{tagName}
+      </if>
+      <if test="typeId != null and Id != -1">
+        and blogs.type_id = #{typeId}
+      </if>
+      <if test="startTime != null">
+        and <![CDATA[blogs.create_time > startTime and blogs.create_time < now()]]>
+      </if>
+    </where>
+  </select>
+
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from blogs
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from blogs
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.wuzt.myblog.model.Blogs" keyColumn="id" keyProperty="id" useGeneratedKeys="true">
+    insert into blogs (id, title, type_id, 
+      click_num, user_id, status, 
+      create_time, content)
+    values (#{id,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{typeId,jdbcType=INTEGER}, 
+      #{clickNum,jdbcType=BIGINT}, #{userId,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{content,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.wuzt.myblog.model.Blogs" keyColumn="id" keyProperty="id" useGeneratedKeys="true">
+    insert into blogs
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="typeId != null" >
+        type_id,
+      </if>
+      <if test="clickNum != null" >
+        click_num,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+      <if test="subContent != null and subContent!=''" >
+        sub_content,
+      </if>
+      <if test="cover != null and cover!=''" >
+        cover,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="typeId != null" >
+        #{typeId,jdbcType=INTEGER},
+      </if>
+      <if test="clickNum != null" >
+        #{clickNum,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="subContent != null and subContent!=''" >
+        #{subContent,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="cover != null and cover!=''" >
+        #{cover,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wuzt.myblog.model.Blogs" >
+    update blogs
+    <set >
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="typeId != null" >
+        type_id = #{typeId,jdbcType=INTEGER},
+      </if>
+      <if test="clickNum != null" >
+        click_num = #{clickNum,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="content != null" >
+        content = #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.wuzt.myblog.model.Blogs" >
+    update blogs
+    set title = #{title,jdbcType=VARCHAR},
+      type_id = #{typeId,jdbcType=INTEGER},
+      click_num = #{clickNum,jdbcType=BIGINT},
+      user_id = #{userId,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      content = #{content,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wuzt.myblog.model.Blogs" >
+    update blogs
+    set title = #{title,jdbcType=VARCHAR},
+      type_id = #{typeId,jdbcType=INTEGER},
+      click_num = #{clickNum,jdbcType=BIGINT},
+      user_id = #{userId,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
