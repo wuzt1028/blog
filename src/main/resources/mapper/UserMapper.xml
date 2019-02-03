@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.wuzt.myblog.dao.UserDao" >
-    <resultMap id="userResult" type="com.wuzt.myblog.model.User" >
+<mapper namespace="com.wuzt.myblog.dao.UserDao">
+    <resultMap id="userResult" type="com.wuzt.myblog.model.User">
         <id column="id" property="id"/>
         <result column="username" property="username"/>
         <result column="password" property="password"/>
@@ -14,11 +14,11 @@
         <result column="create_time" property="createTime"/>
     </resultMap>
     <sql id="BASE_TABLE">
-      user
+        user
     </sql>
 
     <sql id="BASE_COLUMN">
-      id,username,password,email,qq,mobile,nickname,avatar,description,create_time
+        id,username,password,email,qq,mobile,nickname,avatar,description,create_time
     </sql>
 
 
@@ -41,9 +41,9 @@
     <!--获取所有user-->
     <select id="selectUsers" resultMap="userResult">
         SELECT
-          <include refid="BASE_COLUMN"/>
+        <include refid="BASE_COLUMN"/>
         FROM
-          <include refid="BASE_TABLE"/>
+        <include refid="BASE_TABLE"/>
     </select>
 
     <!--根据username获取user-->

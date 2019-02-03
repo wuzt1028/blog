@@ -31,18 +31,16 @@ import java.util.Map;
  * @Description:
  */
 @Controller
-@RequestMapping("/file")
+@RequestMapping("/admin/file")
 public class FileController {
 
-    @Value("${configValue.filePath}")
-    private String filePath;
     @Value("${configValue.fileUploadApi}")
     private String fileUploadApi;
     @Value("${configValue.fileHost}")
     private String fileHost;
 
     @RequestMapping("/uploadImgFile")
-    public void uploadImgFile(HttpServletRequest request,HttpServletResponse response){
+    public void uploadImgFile(HttpServletRequest request, HttpServletResponse response){
         //ImageUploadUtil.ckeditor(request, response, filePath);
         final String remote_url = fileUploadApi;// 第三方服务器请求地址
         CloseableHttpClient httpClient = HttpClients.createDefault();

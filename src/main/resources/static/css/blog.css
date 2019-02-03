@@ -1,4 +1,4 @@
-.round_icon{
+.round_icon {
     width: 70px;
     height: 70px;
     display: flex;
@@ -9,14 +9,17 @@
     float: left;
     margin: 5px 5px;
 }
-.editBlog_header{
+
+.editBlog_header {
     margin: 0 47%;
 }
-.editBlog_header_span{
+
+.editBlog_header_span {
     margin: 5px 15px 0px 0px;
     text-align: center;
 }
-.tag-div{
+
+.tag-div {
     margin-top: 16px;
     padding: 8px 8px 0 16px;
     width: 480px;
@@ -27,13 +30,15 @@
     overflow-y: auto;
     float: left;
 }
-.checkbox-style{
+
+.checkbox-style {
     -ms-transform: scale(1.5);
     -moz-transform: scale(1.5);
     -webkit-transform: scale(1.5);
     -o-transform: scale(1.5);
 }
-.tag-span{
+
+.tag-span {
     background: #8e8e8e;
     border: 2px;
     border-radius: 2px;
@@ -41,7 +46,8 @@
     -moz-border-radius: 25px;
     margin: 0px 5px;
 }
-.blogType-select{
+
+.blogType-select {
     width: 120px;
     height: 35px;
 }

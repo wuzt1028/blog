@@ -1,0 +1,23 @@
+.w50pre {
+    width: 50%;
+}
+.fl {
+    float: left;
+}
+.clear {
+    clear: both;
+    font-size: 0px;
+    content: " ";
+    line-height: 1px;
+    height: 1px;
+    margin-top: -1px;
+}
+.ddBar li {
+    padding: 10px 0 10px 4em;
+}
+.mar-lr5-td10 {
+    margin: 20px 10px;
+}
+.width-275 {
+    width: 275px!important;
+}

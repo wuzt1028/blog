@@ -5,17 +5,19 @@ import java.security.NoSuchAlgorithmException;
 
 /**
  * MD5加密
+ *
  * @author wuzt
  * @date: 2018年6月26日 上午11:34:52
  */
 public class MD5Util {
-	
-	/**
-	 * 普通方式
-	 * @param key
-	 * @return
-	 */
-	public static String MD5(String key) {
+
+    /**
+     * 普通方式
+     *
+     * @param key
+     * @return
+     */
+    public static String MD5(String key) {
         char hexDigits[] = {
                 '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'
         };
@@ -41,13 +43,14 @@ public class MD5Util {
             return null;
         }
     }
-	
-	/**
-	 * 加盐方式
-	 * @param password
-	 * @return
-	 */
-	public static String MD5Password(String password) {
+
+    /**
+     * 加盐方式
+     *
+     * @param password
+     * @return
+     */
+    public static String MD5Password(String password) {
         try {
             // 得到一个信息摘要器
             MessageDigest digest = MessageDigest.getInstance("md5");

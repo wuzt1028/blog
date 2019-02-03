@@ -1,8 +1,8 @@
 package com.wuzt.myblog.controller;
 
 import com.github.pagehelper.PageInfo;
-import com.wuzt.myblog.common.redis.RedisUtil;
 import com.wuzt.myblog.model.User;
+import com.wuzt.myblog.redis.RedisUtil;
 import com.wuzt.myblog.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,14 +31,14 @@ public class UsersController {
             @RequestParam(name = "pageNum", required = false, defaultValue = "1")
                     int pageNum,
             @RequestParam(name = "pageSize", required = false, defaultValue = "10")
-                    int pageSize){
+                    int pageSize) {
         PageInfo<User> userPage = new PageInfo<User>();
         Object obj = redisUtil.get("userPage");
-        if(obj == null) {
+        if (obj == null) {
             userPage = userService.findAllUser(pageNum, pageSize);
             redisUtil.set("userPage", userPage);
-        }else{
-            userPage = (PageInfo<User>)obj;
+        } else {
+            userPage = (PageInfo<User>) obj;
         }
         return userPage;
     }

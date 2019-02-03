@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wuzt.myblog.dao.AccessRecordDao">
+
+    <insert id="addAccessRecords" parameterType="java.util.List"
+            useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+        insert into
+        access_record
+        (id, ip, url, create_time)
+        values
+        <foreach collection="list" item="item" index="index"
+                 separator=",">
+            (#{item.id},#{item.ip},#{item.url},#{item.createTime})
+        </foreach>
+    </insert>
+
+</mapper>

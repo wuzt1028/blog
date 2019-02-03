@@ -8,22 +8,22 @@ package com.wuzt.myblog.model;
 
 public class FileEntity {
 
-        public String fileName;
-        public String fileUrl;
+    public String fileName;
+    public String fileUrl;
 
-        public String getFileName() {
-            return fileName;
-        }
+    public String getFileName() {
+        return fileName;
+    }
 
-        public void setFileName(String fileName) {
-            this.fileName = fileName;
-        }
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
+    }
 
-        public String getFileUrl() {
-            return fileUrl;
-        }
+    public String getFileUrl() {
+        return fileUrl;
+    }
 
-        public void setFileUrl(String fileUrl) {
-            this.fileUrl = fileUrl;
-        }
+    public void setFileUrl(String fileUrl) {
+        this.fileUrl = fileUrl;
+    }
 }

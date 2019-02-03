@@ -1,9 +1,12 @@
 package com.wuzt.myblog.dao;
 
 import com.wuzt.myblog.model.BlogType;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Map;
 
+@Repository
 public interface BlogTypeDao {
     int deleteByPrimaryKey(Integer id);
 
@@ -18,4 +21,7 @@ public interface BlogTypeDao {
     int updateByPrimaryKey(BlogType record);
 
     List<BlogType> selectByCondition(BlogType record);
+
+    /* 根据tagName,userId查询tag数量 */
+    Integer selectCountByName(Map<String, Object> param);
 }

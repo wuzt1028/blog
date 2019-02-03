@@ -1,93 +1,102 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.wuzt.myblog.dao.BlogTypeDao" >
-  <resultMap id="BaseResultMap" type="com.wuzt.myblog.model.BlogType" >
-    <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="type_name" property="typeName" jdbcType="VARCHAR" />
-    <result column="user_id" property="userId" jdbcType="INTEGER" />
-    <result column="create_name" property="createName" jdbcType="TIMESTAMP" />
-  </resultMap>
-  <sql id="Base_Column_List" >
-    id, type_name, user_id, create_name
-  </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
-    <include refid="Base_Column_List" />
-    from blog_type
-    where id = #{id,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from blog_type
-    where id = #{id,jdbcType=INTEGER}
-  </delete>
-  <insert id="insert" parameterType="com.wuzt.myblog.model.BlogType" keyColumn="id" keyProperty="id" useGeneratedKeys="true">
-    insert into blog_type (id, type_name, user_id, 
-      create_name)
-    values (#{id,jdbcType=INTEGER}, #{typeName,jdbcType=VARCHAR}, #{userId,jdbcType=INTEGER}, 
-      #{createName,jdbcType=TIMESTAMP})
-  </insert>
-  <insert id="insertSelective" parameterType="com.wuzt.myblog.model.BlogType" keyColumn="id" keyProperty="id" useGeneratedKeys="true">
-    insert into blog_type
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        id,
-      </if>
-      <if test="typeName != null" >
-        type_name,
-      </if>
-      <if test="userId != null" >
-        user_id,
-      </if>
-      <if test="createName != null" >
-        create_name,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=INTEGER},
-      </if>
-      <if test="typeName != null" >
-        #{typeName,jdbcType=VARCHAR},
-      </if>
-      <if test="userId != null" >
-        #{userId,jdbcType=INTEGER},
-      </if>
-      <if test="createName != null" >
-        #{createName,jdbcType=TIMESTAMP},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.wuzt.myblog.model.BlogType" >
-    update blog_type
-    <set >
-      <if test="typeName != null" >
-        type_name = #{typeName,jdbcType=VARCHAR},
-      </if>
-      <if test="userId != null" >
+<mapper namespace="com.wuzt.myblog.dao.BlogTypeDao">
+    <resultMap id="BaseResultMap" type="com.wuzt.myblog.model.BlogType">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="type_name" property="typeName" jdbcType="VARCHAR"/>
+        <result column="user_id" property="userId" jdbcType="INTEGER"/>
+        <result column="create_name" property="createName" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, type_name, user_id, create_name
+    </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from blog_type
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete from blog_type
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="com.wuzt.myblog.model.BlogType" keyColumn="id" keyProperty="id"
+            useGeneratedKeys="true">
+        insert into blog_type (id, type_name, user_id,
+        create_name)
+        values (#{id,jdbcType=INTEGER}, #{typeName,jdbcType=VARCHAR}, #{userId,jdbcType=INTEGER},
+        #{createName,jdbcType=TIMESTAMP})
+    </insert>
+    <insert id="insertSelective" parameterType="com.wuzt.myblog.model.BlogType" keyColumn="id" keyProperty="id"
+            useGeneratedKeys="true">
+        insert into blog_type
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="typeName != null">
+                type_name,
+            </if>
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="createName != null">
+                create_name,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="typeName != null">
+                #{typeName,jdbcType=VARCHAR},
+            </if>
+            <if test="userId != null">
+                #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="createName != null">
+                #{createName,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.wuzt.myblog.model.BlogType">
+        update blog_type
+        <set>
+            <if test="typeName != null">
+                type_name = #{typeName,jdbcType=VARCHAR},
+            </if>
+            <if test="userId != null">
+                user_id = #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="createName != null">
+                create_name = #{createName,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.wuzt.myblog.model.BlogType">
+        update blog_type
+        set type_name = #{typeName,jdbcType=VARCHAR},
         user_id = #{userId,jdbcType=INTEGER},
-      </if>
-      <if test="createName != null" >
-        create_name = #{createName,jdbcType=TIMESTAMP},
-      </if>
-    </set>
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.wuzt.myblog.model.BlogType" >
-    update blog_type
-    set type_name = #{typeName,jdbcType=VARCHAR},
-      user_id = #{userId,jdbcType=INTEGER},
-      create_name = #{createName,jdbcType=TIMESTAMP}
-    where id = #{id,jdbcType=INTEGER}
-  </update>
+        create_name = #{createName,jdbcType=TIMESTAMP}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
 
-  <select id="selectByCondition" resultMap="BaseResultMap" parameterType="com.wuzt.myblog.model.BlogType" >
-    select
-    <include refid="Base_Column_List" />
-    from blog_type
-    <where>
-      <if test="userId!=null and userId!=0">
-        and user_id = #{userId,jdbcType=INTEGER}
-      </if>
-    </where>
-  </select>
+    <select id="selectByCondition" resultMap="BaseResultMap" parameterType="com.wuzt.myblog.model.BlogType">
+        select
+        <include refid="Base_Column_List"/>
+        from blog_type
+        <where>
+            <if test="userId!=null and userId!=0">
+                and user_id = #{userId,jdbcType=INTEGER}
+            </if>
+        </where>
+    </select>
+    <!-- 根据typeName,userId查询type数量 -->
+    <select id="selectCountByName" resultType="java.lang.Integer" parameterType="java.util.HashMap">
+        select
+            count(1)
+        from blog_type
+        where type_name = #{typeName,jdbcType=VARCHAR} and user_id = #{userId,jdbcType=INTEGER}
+    </select>
 </mapper>

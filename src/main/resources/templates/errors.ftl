@@ -4,6 +4,7 @@
     <title>404错误，您所访问的页面不存在！</title>
     <link rel="stylesheet" href="/static/css/error_style.css"/>
     <link rel="stylesheet" href="/static/css/base.css"/>
+    <link rel="icon" type="image/x-icon" href="/static/images/favicon.ico"/>
 </head>
 
 <body>
@@ -14,7 +15,7 @@
             <div class="e404"></div>
             <p><b>出错啦！</b></p>
             <p>您访问的页面不存在</p>
-            <div class="bt" ><a href="/myblog/index">返回首页</a></div>
+            <div class="bt"><a href="/myblog/index">返回首页</a></div>
         </div>
     </div>
 </div>

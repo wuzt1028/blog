@@ -3,8 +3,6 @@ package com.wuzt.myblog.service;
 import com.github.pagehelper.PageInfo;
 import com.wuzt.myblog.model.User;
 
-import java.util.List;
-
 /**
  * @Auther: wuzt
  * @Date: 2018/6/19 17:48

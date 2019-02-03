@@ -19,7 +19,7 @@ public class BaseErrorPage implements ErrorController {
     Logger logger = LoggerFactory.getLogger(BaseErrorPage.class);
 
     @RequestMapping("/error")
-    public String handleError(HttpServletRequest request){
+    public String handleError(HttpServletRequest request) {
         //获取statusCode:401,404,500
         /*Integer statusCode = (Integer) request.getAttribute("javax.servlet.error.status_code")
         if(statusCode == 401){
@@ -34,6 +34,7 @@ public class BaseErrorPage implements ErrorController {
         //同意跳到错误页面
         return "errors";
     }
+
     @Override
     public String getErrorPath() {
         return "/error";

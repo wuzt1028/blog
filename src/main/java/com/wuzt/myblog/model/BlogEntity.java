@@ -34,6 +34,7 @@ public class BlogEntity {
     //标签集合
     private List<String> tagList;
 
+    private String tagStr;
 
     public Integer getId() {
         return id;
@@ -129,5 +130,13 @@ public class BlogEntity {
 
     public void setCover(String cover) {
         this.cover = cover;
+    }
+
+    public String getTagStr() {
+        return tagStr;
+    }
+
+    public void setTagStr(String tagStr) {
+        this.tagStr = tagStr;
     }
 }

@@ -1,5 +1,10 @@
 package com.wuzt.myblog.utils;
 
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -7,12 +12,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 /**
  * @Auther: wuzt
@@ -35,13 +34,12 @@ public class ImageUploadUtil {
     /**
      * 图片上传
      *
-     * @Title upload
      * @param request
-     * @param DirectoryName
-     *            文件上传目录：比如upload(无需带前面的/) upload/news ..
+     * @param DirectoryName 文件上传目录：比如upload(无需带前面的/) upload/news ..
      * @return
      * @throws IllegalStateException
      * @throws IOException
+     * @Title upload
      */
     public static String upload(HttpServletRequest request, String DirectoryName) throws IllegalStateException,
             IOException {
@@ -101,12 +99,11 @@ public class ImageUploadUtil {
     /**
      * ckeditor文件上传功能，回调，传回图片路径，实现预览效果。
      *
-     * @Title ckeditor
      * @param request
      * @param response
-     * @param DirectoryName
-     *            文件上传目录：比如upload(无需带前面的/) upload/..
+     * @param DirectoryName 文件上传目录：比如upload(无需带前面的/) upload/..
      * @throws IOException
+     * @Title ckeditor
      */
     public static void ckeditor(HttpServletRequest request, HttpServletResponse response, String DirectoryName)
             throws IOException {

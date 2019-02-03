@@ -7,7 +7,8 @@ logging:
   #配置日志文件路径
   level:
     com.wuzt.myblog.dao: DEBUG # #不同目录下的日志可配置不同级别（改成你的mapper文件所在包路径,打印sql）
-    org.springfromework.web: info
+    com.wuzt.myblog.controller: DEBUG
+    org.springfromework.web: DEBUG
     org.hibernate: error
     #采用相对路径方式将日志文件输出到【log\myspringboot.log】
     file: log\myspringboot.log
@@ -23,7 +24,7 @@ spring:
           filters: stat
           driver-class-name: com.mysql.jdbc.Driver
           #基本属性
-          url: jdbc:mysql://140.143.233.156:3306/myBlogs?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true
+          url: jdbc:mysql://144.34.202.125:3306/myBlogs?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true
           username: root
           password: wzt3521478
           #配置初始化大小/最小/最大
@@ -47,7 +48,7 @@ spring:
     #freemarker
     freemarker:
         allow-request-override: false
-        cache: false
+        cache: true
         check-template-location: true
         charset: UTF-8
         content-type: text/html; charset=utf-8
@@ -67,25 +68,26 @@ spring:
 #redis
     redis:
       #数据库索引
-      database: 0
-      host: 140.143.233.156
+      host: 144.34.202.125
       port: 6379
-      password: wzt3521478
-      #连接超时时间
-      timeout: 10000
-      pool:
-        #最大连接数
-        max-active: 8
-        #最大阻塞等待时间(负数表示没限制)
-        max-wait: -1
-        #最大空闲
-        max-idle: 8
-        #最小空闲
-        min-idle: 0
+      password: wuzt1028
+      #timeout: 1000
+      database: 0
+      jedis:
+        pool:
+          max-active: 4
+          max-idle: 8
+          min-idle: 2
+          max-wait: 10000
+      # name of Redis server  哨兵监听的Redis server的名称
+      sentinel:
+        master: mymaster
+        nodes: 144.34.202.125:26379,144.34.202.125:26380,144.34.202.125:26381
+
 
 mybatis:
   mapper-locations: classpath:mapper/*.xml
-  type-aliases-package: com.wuzt.myblog.model
+  type-aliases-package: com.wuzt.blog.model
 
 #pagehelper
 pagehelper:
@@ -99,6 +101,10 @@ pagehelper:
 
 ##### value #####
 configValue:
-  filePath: D://aim//
+  #filePath:
   fileUploadApi: http://140.143.233.156:8082/fileApi/uploadFile
   fileHost: http://140.143.233.156:90/
+  ### 评论插件配置 https://leancloud.cn/###
+  valine:
+    appid: st6FEhYCCMjGyp3k4y6a8ELD-gzGzoHsz
+    appKey: 4JQQQSTPXvqWP7mJ7XlzoXEa

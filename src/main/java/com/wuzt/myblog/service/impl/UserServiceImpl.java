@@ -19,7 +19,7 @@ import java.util.List;
 
 @Service(value = "userService")
 @Transactional
-public class UserServiceImpl  implements UserService {
+public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserDao userDao;
@@ -32,11 +32,11 @@ public class UserServiceImpl  implements UserService {
         return result;
     }
 
-    public User selectUsersByUserName(User user){
+    public User selectUsersByUserName(User user) {
         return userDao.selectUsersByUserName(user);
     }
 
-    public User selectUsersById(Integer id){
+    public User selectUsersById(Integer id) {
         return userDao.selectUsersById(id);
     }
 }

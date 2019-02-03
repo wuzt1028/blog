@@ -1,6 +1,7 @@
 package com.wuzt.myblog.dao;
 
 import com.wuzt.myblog.model.User;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
@@ -9,6 +10,7 @@ import java.util.List;
  * @Date: 2018/6/19 17:46
  * @Description:
  */
+@Repository
 public interface UserDao {
 
     /*
