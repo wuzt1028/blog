@@ -68,7 +68,7 @@ public class BlogServiceImpl implements BlogService {
         if (record.getTags() != null && record.getTags().size() > 0) {
             for (String tagStr : record.getTags()) {
                 Map<String, Object> param = new HashMap<>();
-                param.put("typeName", tagStr);
+                param.put("tagName", tagStr);
                 param.put("userId", record.getUserId());
                 Tags tags = tagsDao.selectCountByName(param);
                 Tags tag = new Tags();

@@ -26,7 +26,7 @@
         layui.use(['form'], function() {
             var layer = layui.layer;
         })
-        var tagFlag = false;
+        var tagFlag = true;
         var typeFlag = true;
         function addTag(obj) {
             var tagVal = $(obj).attr("data-tagName");

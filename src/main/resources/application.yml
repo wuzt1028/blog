@@ -102,8 +102,8 @@ pagehelper:
 ##### value #####
 configValue:
   #filePath:
-  fileUploadApi: http://140.143.233.156:8082/fileApi/uploadFile
-  fileHost: http://140.143.233.156:90/
+  fileUploadApi: http://144.34.202.125/fileApi/uploadFile
+  fileHost: http://144.34.202.125:90
   ### 评论插件配置 https://leancloud.cn/###
   valine:
     appid: st6FEhYCCMjGyp3k4y6a8ELD-gzGzoHsz

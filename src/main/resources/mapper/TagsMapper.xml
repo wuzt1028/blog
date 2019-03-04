@@ -96,8 +96,8 @@
         </where>
         group by tags.id
     </select>
-    <!-- 根据tagName,userId查询tag数量 -->
-    <select id="selectCountByName" resultType="java.lang.Integer" parameterType="java.util.HashMap">
+    <!-- 根据tagName,userId查询tag -->
+    <select id="selectCountByName" resultMap="BaseResultMap" parameterType="java.util.HashMap">
         select
         <include refid="Base_Column_List"/>
         from tags
